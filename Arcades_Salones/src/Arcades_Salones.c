@@ -4,8 +4,8 @@
 #include "SalonesArcades.h"
 
 
-#define MAXsalones 20
-#define MAXarcades 30
+#define MAXsalones 100
+#define MAXarcades 1000
 
 
 int main(void)

@@ -656,7 +656,7 @@ void menuInformes(eSalon listaS[] , int topeS, eArcade listaA[], int topeA)
 void menuSalon(eSalon listaS[] , int topeS, eArcade listaA[], int topeA)
 {
     int opcion;
-    int tope = 6;
+    int tope = 7;
     int resultado;
     do
       {
@@ -667,7 +667,9 @@ void menuSalon(eSalon listaS[] , int topeS, eArcade listaA[], int topeA)
        printf(" 3 - modifica \n");
        printf(" 4 - listar \n");
        printf(" 5 - carga datos de ejemplo \n");
-       printf(" 6 - salir \n");
+       printf(" 6 - ordenar \n");
+
+       printf(" 7 - salir \n");
        opcion = inputIntDesdeHasta(" OPCION: ",1,tope);
        switch(opcion)
        {
@@ -685,6 +687,9 @@ void menuSalon(eSalon listaS[] , int topeS, eArcade listaA[], int topeA)
                 break;
              case 5:
                 harcodearSalon(listaS);
+                break;
+             case 6:
+                resultado = ordenarSalonesCargados(listaS, topeS);
                 break;
        }
        switch(resultado)
@@ -708,7 +713,7 @@ void menuSalon(eSalon listaS[] , int topeS, eArcade listaA[], int topeA)
 void menuArcade(eSalon listaS[] , int topeS, eArcade listaA[], int topeA)
 {
     int opcion;
-    int tope = 7;
+    int tope = 8;
     int resultado;
     do
       {
@@ -720,7 +725,8 @@ void menuArcade(eSalon listaS[] , int topeS, eArcade listaA[], int topeA)
        printf(" 4 - listar \n");
        printf(" 5 - imprimir juegos \n");
        printf(" 6 - carga datos de ejemplo \n");
-       printf(" 7 - salir \n");
+       printf(" 7 - Ordenar lista de arcades\n");
+       printf(" 8 - salir \n");
        opcion = inputIntDesdeHasta(" OPCION: ",1,tope);
        switch(opcion)
        {
@@ -742,6 +748,9 @@ void menuArcade(eSalon listaS[] , int topeS, eArcade listaA[], int topeA)
              case 6:
                 harcodearArcade(listaA);
                 break;
+             case 7:
+            	 resultado = ordenarListaArcades(listaS, topeS, listaA, topeA);
+            	 break;
        }
        switch(resultado)
        {
@@ -757,6 +766,117 @@ void menuArcade(eSalon listaS[] , int topeS, eArcade listaA[], int topeA)
        }
     }while(opcion != tope);
  }
+
+
+
+
+
+int ordenarListaArcades(eSalon listaS[], int topeS, eArcade listaA[], int topeA)
+{
+	int error = 1;
+
+	int campo;
+	eArcade aux;
+	if(listaS != NULL && topeS > 0 && listaA != NULL && topeA > 0)
+	{
+		error = 0;
+		char nombre1[30];
+		char nombre2[30];
+		printf("Ingrese campo por el que desea ordenar \n");
+		printf("0. ID \n");
+		printf("1. Nacionalidad \n");
+		printf("2. tipo de Sonido\n");
+		printf("3. cantidad de jugadores \n");
+		printf("4. cantidad máxima de fichas\n");
+		printf("5. nombre del juego\n");
+		printf("6. nombre del salon\n");
+		campo = inputIntDesdeHasta("Ingrese el ID : ",0,6);
+
+
+		for(int i = 0; i < topeA - 1; i++)
+		{
+			if(listaA[i].libre == 0 )
+			{
+				for(int j = i + 1; j<topeA; j++)
+				{
+					if(listaA[j].libre == 0)
+					{
+						switch(campo)
+						{
+						case 0:
+							if(  listaA[i].idArcade > listaA[j].idArcade )
+							{
+								aux = listaA[i];
+								listaA[i] = listaA[j];
+								listaA[j] = aux;
+							}
+							break;
+
+						case 1:
+							if( strcmp( listaA[i].nacionalidadArcade , listaA[j].nacionalidadArcade) > 0)
+							{
+								aux = listaA[i];
+								listaA[i] = listaA[j];
+								listaA[j] = aux;
+							}
+							break;
+						case 2:
+							if(  listaA[i].tipoSonido > listaA[j].tipoSonido )
+							{
+								aux = listaA[i];
+								listaA[i] = listaA[j];
+								listaA[j] = aux;
+							}
+							break;
+						case 3:
+							if(  listaA[i].cantidadJugadores > listaA[j].cantidadJugadores )
+							{
+								aux = listaA[i];
+								listaA[i] = listaA[j];
+								listaA[j] = aux;
+							}
+							break;
+						case 4:
+							if(  listaA[i].capacidadMaxFichas > listaA[j].capacidadMaxFichas )
+							{
+								aux = listaA[i];
+								listaA[i] = listaA[j];
+								listaA[j] = aux;
+							}
+							break;
+						case 5:
+							if( strcmp( listaA[i].nombreJuego , listaA[j].nombreJuego) > 0)
+							{
+								aux = listaA[i];
+								listaA[i] = listaA[j];
+								listaA[j] = aux;
+							}
+							break;
+						case 6:
+							strcpy(nombre1 , listaS[ buscarSalonPorID(listaS, topeS, listaA[i].idSalon)].nombreSalon);
+							strcpy(nombre2 , listaS[ buscarSalonPorID(listaS, topeS, listaA[j].idSalon)].nombreSalon);
+							if( strcmp( nombre1 , nombre2 ) > 0)
+							{
+								aux = listaA[i];
+								listaA[i] = listaA[j];
+								listaA[j] = aux;
+							}
+							break;
+
+						}
+					}
+				}
+
+
+
+			}
+		}
+
+
+
+	}
+	return error;
+}
 
 
 

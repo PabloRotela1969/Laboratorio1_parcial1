@@ -9,6 +9,7 @@
 #define SALONESARCADES_H_
 #include "Salon.h"
 #include "Arcade.h"
+#include "Input.h"
 
 /**
  * @brief metodo de menu principal, consta de tres submenúes, el de salones, arcades e informes
@@ -248,5 +249,19 @@ int montoMaximoDeUnSalonPorID(eSalon listaS[], int topeS, eArcade listaA[], int 
  *         0 = operación exitosa
  */
 int conJuegoMostrarArcadesQueLoTienen(eSalon listaS[], int topeS, eArcade listaA[], int topeA);
+
+
+
+/**
+ * @brief funcion que permite ordenar la lista de arcades por todos sus campos operables por el usuario ( EXCEPTO campo libre ) incluso por el nombre de los salones
+ *
+ * @param listaS lista inicializada de estructura salon
+ * @param topeS cantidad máxima de estructuras salon
+ * @param listaA lista inicializada de estructura arcade
+ * @param topeA cantidad máxima de estructuras arcade
+ * @return 1 = si hubo problemas triviales como alguna de las dos listas vinieron en NULL o alguno de los dos topes de lista en cero
+ *         0 = operación exitosa
+ */
+int ordenarListaArcades(eSalon listaS[], int topeS, eArcade listaA[], int topeA);
 
 #endif /* SALONESARCADES_H_ */

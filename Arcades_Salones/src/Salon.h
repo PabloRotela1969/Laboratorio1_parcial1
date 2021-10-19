@@ -124,4 +124,15 @@ int altaSalon( eSalon lista[] , int cantidad  );
 int modificaSalon( eSalon lista[] , int cantidad  );
 
 
+
+/**
+ * @brief funcion que permite ordenar por alguno de los campos de la estructura de Salon a la lista de salones pera poder buscar mejor algun item en la grilla
+ *
+ * @param lista de salones inicializada
+ * @param cantidad cantidad máxima de estructuras dentro de la lista
+ * @return 1 = se pasó la lista en null o una cantidad igual o inferior a cero de elementos máximos dentro de la lista
+ *         0 = operación completada exitosamente
+ *          */
+int ordenarSalonesCargados( eSalon lista[] , int cantidad);
+
 #endif /* SALON_H_ */

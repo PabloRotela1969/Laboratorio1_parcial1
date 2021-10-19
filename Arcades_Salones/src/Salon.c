@@ -15,7 +15,7 @@ void harcodearSalon(eSalon lista[])
 
   int idSalons[10] = {10,11,12,13,14,15,16,17,18,19};
    char nombreSalons[10][30] = {"alfa","beta","gamma", "delta", "epsilon", "zeta","eta","theta", "iota", "kappa"};
-   char direccionSalons[10][30] = {"alfa","beta","gamma", "delta", "epsilon", "zeta","eta","theta", "iota", "kappa"};
+   char direccionSalons[10][30] = {"Cucha cucha 23","San Martin de Tours 34","Guardia Vieja 55", "Los Aljibes 223", "Los Ceibos 103", "23 de Octubre 101","Los Platanos 220","Washington 991", "Tucuman 554", "Camacua 989"};
   int tipoSalons[10] = {1,1,2,1,2,1,1,1,2,2};
   int libres[10] = {0,0,0,0,0,0,0,0,0,0};
 
@@ -148,6 +148,86 @@ if(lista != NULL && cantidad > 0 && cantidadDeSalonCargados( lista,cantidad) > 0
   }
 return error;
 }
+
+
+
+
+int ordenarSalonesCargados( eSalon lista[] , int cantidad)
+{
+
+   int error = 1;
+   int campo;
+   eSalon aux;
+   if(lista != NULL && cantidad > 0 && cantidadDeSalonCargados( lista,cantidad) > 0)
+   {
+	   printf(" ELIJA CAMPO DE ORDENAMIENTO \n");
+	   printf(" 0. ID\n");
+	   printf(" 1. Nombre\n");
+	   printf(" 2. Direccion\n");
+	   printf(" 3. tipo\n");
+	   error = 0;
+	   campo = inputIntDesdeHasta(" Ingrese campo por numero : ", 0, 3);
+
+	   for(int i = 0; i<cantidad -1; i++)
+	   {
+		   if(lista[i].libre == 0)
+		   {
+			   for(int j = i + 1; j<cantidad; j++ )
+		       {
+				   if(lista[j].libre == 0)
+				   {
+					   switch(campo)
+					   {
+					   case 0:
+						   if(lista[i].idSalon > lista[j].idSalon)
+						   {
+							   aux = lista[i];
+							   lista[i] = lista[j];
+							   lista[j] = aux;
+						   }
+						   break;
+
+					   case 1:
+						   if(strcmp(lista[i].nombreSalon, lista[j].nombreSalon) > 0)
+						   {
+							   aux = lista[i];
+							   lista[i] = lista[j];
+							   lista[j] = aux;
+						   }
+						   break;
+					   case 2:
+						   if(strcmp(lista[i].direccionSalon, lista[j].direccionSalon) > 0)
+						   {
+							   aux = lista[i];
+							   lista[i] = lista[j];
+							   lista[j] = aux;
+						   }
+						   break;
+					   case 3:
+						   if(lista[i].tipoSalon > lista[j].tipoSalon)
+						   {
+							   aux = lista[i];
+							   lista[i] = lista[j];
+							   lista[j] = aux;
+						   }
+						   break;
+					   }
+				   }
+
+			   }
+		   }
+	   }
+  }
+
+return error;
+}
+
+
+
+
+
+
+
 
 
 
